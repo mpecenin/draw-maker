@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawMaker</title>
+    <base href="../../">
+    <script src="src/assets/fabric/fabric.min.js"></script>
+    <script src="src/draw-maker.js"></script>
+
+    <style>
+        #svg-container.show {
+            width: 300px;
+            height: 300px;
+            background-image: url("samples/assets/images/car-engine.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            border: 1px solid gray;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let container = document.getElementById("maker-container");
+            let options = {
+                width: 300,
+                height: 300,
+                backgroundImage: "samples/assets/images/car-engine.jpg",
+            };
+            let maker = new drawmaker.DrawMaker(container, options);
+            let json = '{"objects":[{"drawmaker":{"type":"RectMaker"},"type":"rect","left":9,"top":9,"width":50,"height":50,"fill":null,"stroke":"#ff0000","strokeWidth":2}]}';
+            maker.loadJSON(json);
+        });
+
+        function onClear() {
+            document.getElementById("maker-container").drawmaker.clear();
+            document.getElementById("empty-container").innerHTML = "";
+            document.getElementById("json-container").innerHTML = "";
+            document.getElementById("svg-container").innerHTML = "";
+            document.getElementById("svg-container").className = "";
+            document.getElementById("svg-text-container").innerHTML = "";
+            document.getElementById("svg-inline-container").innerHTML = "";
+        }
+
+        function onIsEmpty() {
+            let empty = document.getElementById("maker-container").drawmaker.isEmpty();
+            document.getElementById("empty-container").textContent = empty;
+        }
+
+        function onToJSON() {
+            let json = document.getElementById("maker-container").drawmaker.toJSON();
+            document.getElementById("json-container").textContent = json;
+        }
+
+        function onToSVG() {
+            let svg = document.getElementById("maker-container").drawmaker.toSVG();
+            document.getElementById("svg-container").innerHTML = svg;
+            document.getElementById("svg-container").className = "show";
+            document.getElementById("svg-text-container").textContent = svg;
+            document.getElementById("svg-inline-container").innerHTML = svg;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="maker-container"></div>
+    <p></p>
+    <button onclick="onClear()">Clear</button>
+    <button onclick="onIsEmpty()">IsEmpty</button>
+    <button onclick="onToJSON()">ToJSON</button>
+    <button onclick="onToSVG()">ToSVG</button>
+
+    <p></p>
+    <div id="empty-container"></div>
+    <p></p>
+    <div id="json-container"></div>
+    <p></p>
+    <div id="svg-container"></div>
+    <p></p>
+    <div id="svg-text-container"></div>
+    <p></p>
+    <div id="svg-inline-container"></div>
+</body>
+
+</html>

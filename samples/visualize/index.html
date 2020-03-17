@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawMaker</title>
+    <base href="../../">
+    <script src="src/assets/fabric/fabric.min.js"></script>
+    <script src="src/draw-maker.js"></script>
+    <script src="src/draw-maker.element.js"></script>
+
+    <style>
+        .modal {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content {
+            display: inline-block;
+            width: 50vw;
+            overflow: auto;
+            margin: 10px;
+            box-shadow: 0px 0px 5px black;
+            background-color: white;
+        }
+
+        .modal.show {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #svg-container {
+            width: 300px;
+            height: 300px;
+            background-image: url("samples/assets/images/car-engine.jpg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="svg-container"></div>
+    <p></p>
+    <button onclick="onOpenDrawMaker()">OpenDrawMaker</button>
+
+    <div id="modal-container" class="modal">
+        <div class="modal-content">
+            <div style="margin: 10px;">
+                <dm-drawmaker id="maker-container" width="300" height="300"
+                    backgroundImage="samples/assets/images/car-engine.jpg">
+                </dm-drawmaker>
+            </div>
+            <div style="margin: 10px; text-align: center;">
+                <button onclick="onDelete()">Delete</button>
+                <button onclick="onSave()">Save</button>
+                <button onclick="onCancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let database = null;
+
+        function onOpenDrawMaker() {
+            document.getElementById("maker-container").drawmaker.loadJSON(database);
+            document.getElementById("modal-container").classList.add("show");
+        }
+
+        function onDelete() {
+            database = null;
+            document.getElementById("svg-container").innerHTML = "";
+            document.getElementById("modal-container").classList.remove("show");
+        }
+
+        function onSave() {
+            let maker = document.getElementById("maker-container").drawmaker;
+            if (maker.isEmpty()) {
+                onDelete();
+            } else {
+                database = maker.toJSON();
+                document.getElementById("svg-container").innerHTML = maker.toSVG();
+                document.getElementById("modal-container").classList.remove("show");
+            }
+        }
+
+        function onCancel() {
+            document.getElementById("modal-container").classList.remove("show");
+        }
+    </script>
+</body>
+
+</html>
