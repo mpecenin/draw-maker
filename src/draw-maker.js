@@ -5,12 +5,6 @@
 (function (owner) {
     "use strict";
 
-    /*
-    TODO:
-    - renomear branch atual para dev, e criar novo master, quando pronto, com release 1.0.0.
-    - github pages vs wiki, fazer pages na raiz mesmo, do master.
-    */
-
     let ns = owner.drawmaker || (owner.drawmaker = {});
 
     ns.DrawMaker = class {
