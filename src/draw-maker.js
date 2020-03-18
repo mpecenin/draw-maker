@@ -752,7 +752,11 @@
                     let maker = new ns[obj.drawmaker.type](this);
                     maker.set(obj, property, selectValue);
                 });
-                this.canvas.setActiveObject(new fabric.ActiveSelection(objs, { canvas: this.canvas }));
+                if (objs.length > 1) {
+                    this.canvas.setActiveObject(new fabric.ActiveSelection(objs, { canvas: this.canvas }));
+                } else {
+                    this.canvas.setActiveObject(objs[0]);
+                }
             } else {
                 this[property] = selectValue;
             }
