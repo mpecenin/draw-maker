@@ -121,6 +121,11 @@
                             width: 15px;
                             height: 15px;
                         }
+
+                        .dm-canvas::-webkit-scrollbar-track {
+                            border-radius: 3px;
+                            box-shadow: inset 0 0 5px gray;
+                        }
                 
                         .dm-canvas::-webkit-scrollbar-thumb {
                             border-radius: 3px;
