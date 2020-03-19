@@ -159,7 +159,7 @@
                             vertical-align: bottom;
                         }
 
-                        @media (hover: hover) {
+                        @media screen and (pointer: fine) {
                             .dm-drawmaker button:hover {
                                 border-color: black;
                             }
