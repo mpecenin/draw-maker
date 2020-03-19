@@ -22,13 +22,18 @@
             background-color: rgba(0, 0, 0, 0.2);
         }
 
-        .modal-content {
+        .modal-document {
             display: inline-block;
             width: 50vw;
             overflow: auto;
-            margin: 10px;
             box-shadow: 0px 0px 5px black;
             background-color: white;
+        }
+
+        @media (hover: none) {
+            .modal-document {
+                width: 100vw;
+            }
         }
 
         .modal.show {
@@ -55,16 +60,18 @@
     <button onclick="onOpenDrawMaker()">OpenDrawMaker</button>
 
     <div id="modal-container" class="modal">
-        <div class="modal-content">
-            <div style="margin: 10px;">
-                <dm-drawmaker id="maker-container" width="300" height="300"
-                    backgroundImage="samples/assets/images/car-engine.jpg">
-                </dm-drawmaker>
-            </div>
-            <div style="margin: 10px; text-align: center;">
-                <button onclick="onDelete()">Delete</button>
-                <button onclick="onSave()">Save</button>
-                <button onclick="onCancel()">Cancel</button>
+        <div class="modal-document">
+            <div style="height: calc(100% - 20px); margin: 10px;">
+                <div style="height: calc(100% - 30px);">
+                    <dm-drawmaker id="maker-container" style="height: 100%;" width="300" height="300"
+                        backgroundImage="samples/assets/images/car-engine.jpg">
+                    </dm-drawmaker>
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <button onclick="onDelete()">Delete</button>
+                    <button onclick="onSave()">Save</button>
+                    <button onclick="onCancel()">Cancel</button>
+                </div>
             </div>
         </div>
     </div>

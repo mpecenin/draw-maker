@@ -159,7 +159,13 @@
                             vertical-align: bottom;
                         }
 
-                        .dm-drawmaker button:hover, .dm-drawmaker button.dm-select {
+                        @media (hover: hover) {
+                            .dm-drawmaker button:hover {
+                                border-color: black;
+                            }
+                        }
+
+                        .dm-drawmaker button.dm-select {
                             border-color: black;
                         }
 
@@ -212,7 +218,7 @@
                             margin: 5px;
                             white-space: nowrap;
                         }
-
+                        
                         .dm-modal {
                             display: none;
                             width: 100%;
