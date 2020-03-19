@@ -123,17 +123,17 @@
                         }
 
                         .dm-canvas::-webkit-scrollbar-track {
-                            border-radius: 3px;
-                            box-shadow: inset 0 0 5px gray;
+                            background: #f0f0f0;
                         }
                 
                         .dm-canvas::-webkit-scrollbar-thumb {
+                            background: #dbdbdb;
                             border-radius: 3px;
-                            background: lightgray;
+                            box-shadow: inset 0 0 5px gray;
                         }
 
                         .dm-canvas::-webkit-scrollbar-thumb:hover {
-                            background: darkgray;
+                            background: #c2c2c2;
                         }
 
                         .dm-canvas-container {
