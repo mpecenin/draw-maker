@@ -117,6 +117,20 @@
                             text-align: center;
                         }
 
+                        .dm-canvas::-webkit-scrollbar {
+                            width: 15px;
+                            height: 15px;
+                        }
+                
+                        .dm-canvas::-webkit-scrollbar-thumb {
+                            border-radius: 3px;
+                            background: lightgray;
+                        }
+
+                        .dm-canvas::-webkit-scrollbar-thumb:hover {
+                            background: darkgray;
+                        }
+
                         .dm-canvas-container {
                             display: inline-block;
                             border: 1px dashed gray;
