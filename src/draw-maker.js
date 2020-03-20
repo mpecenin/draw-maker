@@ -42,6 +42,10 @@
             return this._controller.toSVG();
         }
 
+        reset(options) {
+            return this._controller.reset(options);
+        }
+
     }
 
     let tt = function (key) {
@@ -834,6 +838,36 @@
         toSVG() {
             this._resetZoom();
             return this.canvas.toSVG({ suppressPreamble: true });
+        }
+
+        reset(options) {
+            if (!options)
+                return;
+            if (options.width) {
+                this.width = options.width;
+            }
+            if (options.height) {
+                this.height = options.height;
+            }
+            if (options.backgroundImage !== undefined) {
+                this.backgroundImage = options.backgroundImage;
+            }
+            if (options.fill !== undefined) {
+                this.fill = options.fill;
+            }
+            if (options.stroke !== undefined) {
+                this.stroke = options.stroke;
+            }
+            if (options.strokeWidth) {
+                this.strokeWidth = options.strokeWidth;
+            }
+            if (options.strokeDashArray !== undefined) {
+                this.strokeDashArray = options.strokeDashArray;
+            }
+            if (options.opacity) {
+                this.opacity = options.opacity;
+            }
+            this.clear();
         }
 
     }

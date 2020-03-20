@@ -10,7 +10,12 @@
     <script src="src/draw-maker.js"></script>
 
     <style>
+        #svg-container {
+            display: none;
+        }
+
         #svg-container.show {
+            display: block;
             width: 300px;
             height: 300px;
             background-image: url("samples/assets/images/car-engine.jpg");
@@ -61,6 +66,20 @@
             document.getElementById("svg-text-container").textContent = svg;
             document.getElementById("svg-inline-container").innerHTML = svg;
         }
+
+        function onReset() {
+            let options = {
+                width: 200,
+                height: 200,
+                backgroundImage: "samples/assets/images/motorcycle-engine.jpg",
+            };
+            document.getElementById("maker-container").drawmaker.reset(options);
+            let svgContainer = document.getElementById("svg-container");
+            svgContainer.style.width = options.width + "px";
+            svgContainer.style.height = options.height + "px";
+            svgContainer.style.backgroundImage = "url('" + options.backgroundImage + "')";
+            onClear();
+        }
     </script>
 </head>
 
@@ -71,6 +90,7 @@
     <button onclick="onIsEmpty()">IsEmpty</button>
     <button onclick="onToJSON()">ToJSON</button>
     <button onclick="onToSVG()">ToSVG</button>
+    <button onclick="onReset()">Reset</button>
 
     <p></p>
     <div id="empty-container"></div>
