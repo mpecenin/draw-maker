@@ -77,15 +77,16 @@
     </div>
 
     <script>
-        let database = null;
+        let database = { json: null, svg: null };
 
         function onOpenDrawMaker() {
-            document.getElementById("maker-container").drawmaker.loadJSON(database);
+            document.getElementById("maker-container").drawmaker.loadJSON(database.json);
             document.getElementById("modal-container").classList.add("show");
         }
 
         function onDelete() {
-            database = null;
+            database.json = null;
+            database.svg = null;
             document.getElementById("svg-container").innerHTML = "";
             document.getElementById("modal-container").classList.remove("show");
         }
@@ -95,8 +96,9 @@
             if (maker.isEmpty()) {
                 onDelete();
             } else {
-                database = maker.toJSON();
-                document.getElementById("svg-container").innerHTML = maker.toSVG();
+                database.json = maker.toJSON();
+                database.svg = maker.toSVG();
+                document.getElementById("svg-container").innerHTML = database.svg;
                 document.getElementById("modal-container").classList.remove("show");
             }
         }
