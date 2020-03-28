@@ -108,13 +108,13 @@
                             left: 0;
                             width: 100%;
                             height: 100%;
-                            z-index: 10;
+                            z-index: 100;
                         }
 
                         .dm-menu {
                             position: sticky;
                             top: 0;
-                            z-index: 20;
+                            z-index: 10;
                             background-color: #ebebeb;
                         }
 
@@ -225,7 +225,7 @@
                             padding-bottom: 5px;
                             position: absolute;
                             right: 0;
-                            z-index: 30;
+                            z-index: 20;
                         }
 
                         .dm-dropdown-list button {
@@ -241,7 +241,7 @@
                             flex-direction: column;
                             align-items: center;
                             position: absolute;
-                            z-index: 40;
+                            z-index: 30;
                         }
 
                         .dm-modal-display {
