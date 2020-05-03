@@ -25,6 +25,8 @@
         "Object Opacity": "Opacidade do Objeto",
         "Bring Forwards": "Trazer para Frente",
         "Send Backwards": "Enviar para Trás",
+        "Bring to Front": "Trazer para o Topo",
+        "Send to Back": "Enviar para o Fundo",
         "Without Color / Transparent": "Sem Cor / Transparente",
     };
 

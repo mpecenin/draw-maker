@@ -197,8 +197,10 @@
                         .dm-drawmaker[data-dm-zoom-limit="min"] .dm-menu [data-dm-operation="zoomOut"],
                         .dm-drawmaker[data-dm-object-select="false"] .dm-menu [data-dm-operation="remove"],
                         .dm-drawmaker[data-dm-object-select="false"] .dm-menu [data-dm-operation="duplicate"],
+                        .dm-drawmaker[data-dm-object-select="false"] .dm-menu [data-dm-operation="bringForwards"],
                         .dm-drawmaker[data-dm-object-select="false"] .dm-menu [data-dm-operation="sendBackwards"],
-                        .dm-drawmaker[data-dm-object-select="false"] .dm-menu [data-dm-operation="bringForwards"]
+                        .dm-drawmaker[data-dm-object-select="false"] .dm-menu [data-dm-operation="bringToFront"],
+                        .dm-drawmaker[data-dm-object-select="false"] .dm-menu [data-dm-operation="sendToBack"]
                         {
                             border-color: transparent;
                             color: gray;
@@ -320,6 +322,8 @@
                                         <button data-dm-property="opacity">${tt("Object Opacity")}</button>
                                         <button data-dm-operation="bringForwards">${tt("Bring Forwards")}</button>
                                         <button data-dm-operation="sendBackwards">${tt("Send Backwards")}</button>
+                                        <button data-dm-operation="bringToFront">${tt("Bring to Front")}</button>
+                                        <button data-dm-operation="sendToBack">${tt("Send to Back")}</button>
                                     </div>
                                 </div>
                             </div>
@@ -540,10 +544,20 @@
                     this.canvas.bringForward(obj);
                 });
             });
-
             this._attachListener(".dm-menu [data-dm-operation='sendBackwards']", "click", (listener, event) => {
                 this.getSelectedObjects().forEach(obj => {
                     this.canvas.sendBackwards(obj);
+                });
+            });
+
+            this._attachListener(".dm-menu [data-dm-operation='bringToFront']", "click", (listener, event) => {
+                this.getSelectedObjects().forEach(obj => {
+                    this.canvas.bringToFront(obj);
+                });
+            });
+            this._attachListener(".dm-menu [data-dm-operation='sendToBack']", "click", (listener, event) => {
+                this.getSelectedObjects().forEach(obj => {
+                    this.canvas.sendToBack(obj);
                 });
             });
 

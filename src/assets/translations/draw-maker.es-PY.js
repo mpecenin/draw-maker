@@ -25,6 +25,8 @@
         "Object Opacity": "Opacidad del Objeto",
         "Bring Forwards": "Traer al Frente",
         "Send Backwards": "Enviar al Revés",
+        "Bring to Front": "Traer al Cima",
+        "Send to Back": "Enviar al Fondo",
         "Without Color / Transparent": "Sin Color / Transparente",
     };
 
