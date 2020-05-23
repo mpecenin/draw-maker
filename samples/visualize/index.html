@@ -43,14 +43,19 @@
         }
 
         #svg-container {
+            position: relative;
+            box-sizing: content-box;
             width: 300px;
             height: 300px;
-            box-sizing: content-box;
             background-image: url("samples/assets/images/car-engine.jpg");
             background-size: contain;
             background-repeat: no-repeat;
             display: inline-block;
             border: 1px solid gray;
+        }
+
+        #svg-container > svg {
+            position: absolute;
         }
     </style>
 </head>
