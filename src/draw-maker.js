@@ -100,6 +100,7 @@
                             text-align: start;
                             position: relative;
                             border: 1px solid gray;
+                            white-space: normal;
                         }
 
                         .dm-fullscreen {
