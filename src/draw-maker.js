@@ -9,13 +9,14 @@
 
     ns.DrawMaker = class {
 
-        _controller = null; // Private access (#controller).
-        canvas = null; // Direct access to Fabric Canvas API.
-
         constructor(container, options) {
+            this._controller = null; // Private access (#controller).
+            this.canvas = null; // Direct access to Fabric Canvas API.
+
             if (!container instanceof HTMLElement) {
                 throw new TypeError("Parameter container must be an instance of a host HTML element.");
             }
+
             let root = container.attachShadow({ mode: "open" });
             this._controller = new DrawMakerController(root, options);
             this.canvas = this._controller.canvas;
@@ -55,17 +56,17 @@
 
     let DrawMakerController = class {
 
-        _DEFAULT_COLOR = "#ff0000";
-        _DEFAULT_STROKE_WIDTH = 2;
-        _MIN_ZOOM = 1;
-        _ZOOM_SHIFT_FACTOR = 0.75;
-        _MAX_ZOOM = this._MIN_ZOOM + (this._ZOOM_SHIFT_FACTOR * 5);
-
-        _root = null;
-        _selected = null;
-        _making = null;
-
         constructor(root, options) {
+            this._DEFAULT_COLOR = "#ff0000";
+            this._DEFAULT_STROKE_WIDTH = 2;
+            this._MIN_ZOOM = 1;
+            this._ZOOM_SHIFT_FACTOR = 0.75;
+            this._MAX_ZOOM = this._MIN_ZOOM + (this._ZOOM_SHIFT_FACTOR * 5);
+    
+            this._root = null;
+            this._selected = null;
+            this._making = null;
+            
             this._root = root;
             options = options || {};
 
@@ -890,10 +891,9 @@
 
     ns.BaseMaker = class {
 
-        type = null;
-        props = [];
-
         constructor(dm) {
+            this.type = null;
+            this.props = [];    
             this.dm = dm;
         }
 
@@ -964,15 +964,14 @@
 
     ns.RectMaker = class extends ns.BaseMaker {
 
-        type = "RectMaker";
-        props = ["fill", "stroke", "strokeWidth", "strokeDashArray", "opacity"];
-        _startX = 0;
-        _startY = 0;
-        _shape = null;
-        _attached = false;
-
         constructor(dm) {
-            super(dm);
+            super(dm);            
+            this.type = "RectMaker";
+            this.props = ["fill", "stroke", "strokeWidth", "strokeDashArray", "opacity"];
+            this._startX = 0;
+            this._startY = 0;
+            this._shape = null;
+            this._attached = false;    
         }
 
         _position(options) {
@@ -1026,11 +1025,10 @@
 
     ns.EllipseMaker = class extends ns.RectMaker {
 
-        type = "EllipseMaker";
-        props = ["fill", "stroke", "strokeWidth", "strokeDashArray", "opacity"];
-
         constructor(dm) {
             super(dm);
+            this.type = "EllipseMaker";
+            this.props = ["fill", "stroke", "strokeWidth", "strokeDashArray", "opacity"];
         }
 
         start(options) {
@@ -1070,11 +1068,10 @@
 
     ns.TriangleMaker = class extends ns.RectMaker {
 
-        type = "TriangleMaker";
-        props = ["fill", "stroke", "strokeWidth", "strokeDashArray", "opacity"];
-
         constructor(dm) {
             super(dm);
+            this.type = "TriangleMaker";
+            this.props = ["fill", "stroke", "strokeWidth", "strokeDashArray", "opacity"];
         }
 
         start(options) {
@@ -1100,15 +1097,14 @@
 
     ns.LineMaker = class extends ns.BaseMaker {
 
-        type = "LineMaker";
-        props = ["stroke", "strokeWidth", "strokeDashArray", "opacity"];
-        _startX = 0;
-        _startY = 0;
-        _shape = null;
-        _attached = false;
-
         constructor(dm) {
             super(dm);
+            this.type = "LineMaker";
+            this.props = ["stroke", "strokeWidth", "strokeDashArray", "opacity"];
+            this._startX = 0;
+            this._startY = 0;
+            this._shape = null;
+            this._attached = false;
         }
 
         _position(options) {
@@ -1158,11 +1154,10 @@
 
     ns.ArrowMaker = class extends ns.LineMaker {
 
-        type = "ArrowMaker";
-        props = ["stroke", "strokeWidth", "strokeDashArray", "opacity"];
-
         constructor(dm) {
             super(dm);
+            this.type = "ArrowMaker";
+            this.props = ["stroke", "strokeWidth", "strokeDashArray", "opacity"];
         }
 
         _headSize(strokeWidth) {
@@ -1295,11 +1290,10 @@
 
     ns.DoubleArrowMaker = class extends ns.ArrowMaker {
 
-        type = "DoubleArrowMaker";
-        props = ["stroke", "strokeWidth", "strokeDashArray", "opacity"];
-
         constructor(dm) {
             super(dm);
+            this.type = "DoubleArrowMaker";
+            this.props = ["stroke", "strokeWidth", "strokeDashArray", "opacity"];
         }
 
         start(options) {
@@ -1380,12 +1374,11 @@
 
     ns.TextBoxMaker = class extends ns.BaseMaker {
 
-        type = "TextBoxMaker";
-        props = ["fill", "opacity"];
-        _shape = null;
-
         constructor(dm) {
             super(dm);
+            this.type = "TextBoxMaker";
+            this.props = ["fill", "opacity"];
+            this._shape = null;
         }
 
         start(options) {
@@ -1424,12 +1417,11 @@
 
     ns.PencilBrushMaker = class extends ns.BaseMaker {
 
-        type = "PencilBrushMaker";
-        props = ["stroke", "strokeWidth", "strokeDashArray", "opacity"];
-        _shape = null;
-
         constructor(dm) {
             super(dm);
+            this.type = "PencilBrushMaker";
+            this.props = ["stroke", "strokeWidth", "strokeDashArray", "opacity"];
+            this._shape = null;
         }
 
         _updatePencil() {
