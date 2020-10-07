@@ -90,6 +90,7 @@
                     <style>
                         :host {
                             display: block;
+                            overflow: auto;
                         }
 
                         .dm-drawmaker {
