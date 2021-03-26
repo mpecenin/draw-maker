@@ -47,13 +47,20 @@
     </style>
 
     <script>
+        let resetIndex = 0;
+        let resetOptions = [{
+            width: 300,
+            height: 300,
+            backgroundImage: "samples/assets/images/car-engine.jpg",
+        }, {
+            width: 200,
+            height: 200,
+            backgroundImage: "samples/assets/images/motorcycle-engine.jpg",
+        }];
+
         document.addEventListener("DOMContentLoaded", function () {
             let container = document.getElementById("maker-container");
-            let options = {
-                width: 300,
-                height: 300,
-                backgroundImage: "samples/assets/images/car-engine.jpg",
-            };
+            let options = resetOptions[resetIndex];
             let maker = new drawmaker.DrawMaker(container, options);
             let json = '{"objects":[{"drawmaker":{"type":"RectMaker"},"type":"rect","left":9,"top":9,"width":50,"height":50,"fill":null,"stroke":"#ff0000","strokeWidth":2}]}';
             maker.loadJSON(json);
@@ -88,11 +95,7 @@
         }
 
         function onReset() {
-            let options = {
-                width: 200,
-                height: 200,
-                backgroundImage: "samples/assets/images/motorcycle-engine.jpg",
-            };
+            let options = resetOptions[++resetIndex % resetOptions.length];
             document.getElementById("maker-container").drawmaker.reset(options);
             let svgContainer = document.getElementById("svg-container");
             svgContainer.style.width = options.width + "px";
