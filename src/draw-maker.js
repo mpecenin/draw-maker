@@ -90,12 +90,13 @@
                     <style>
                         :host {
                             display: block;
-                            overflow: auto;
                         }
 
                         .dm-drawmaker {
                             width: calc(100% - 2px);
                             height: calc(100% - 2px);
+                            max-width: inherit;
+                            max-height: inherit;
                             background-color: white;
                             display: inline-flex;
                             flex-direction: column;
@@ -111,8 +112,10 @@
                             left: 0;
                             width: 100%;
                             height: 100%;
+                            max-width: none;
+                            max-height: none;
                             z-index: 100;
-                            overflow: hidden;
+                            overflow: auto;
                         }
 
                         .dm-menu {
@@ -230,6 +233,7 @@
                             padding-top: 5px;
                             padding-bottom: 5px;
                             position: absolute;
+                            top: 85%;
                             right: 0;
                             z-index: 20;
                         }
