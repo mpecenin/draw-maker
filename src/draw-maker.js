@@ -63,24 +63,26 @@
             this._ZOOM_SHIFT_FACTOR = 0.75;
             this._MAX_ZOOM = this._MIN_ZOOM + (this._ZOOM_SHIFT_FACTOR * 5);
     
-            this._root = null;
+            this._root = root;
             this._selected = null;
             this._making = null;
-            
-            this._root = root;
+
+            this._loadOptions(options);
+            this._loadTemplate();
+        }
+
+        _loadOptions(options) {
             options = options || {};
 
-            this.width = options.width || 400;
-            this.height = options.height || 400;
+            this.width = (options.width > 0) ? options.width : 400;
+            this.height = (options.height > 0) ? options.height : 400;
             this.backgroundImage = options.backgroundImage || null;
 
-            this.fill = options.fill || null;
-            this.stroke = options.stroke || this._DEFAULT_COLOR;
-            this.strokeWidth = options.strokeWidth || this._DEFAULT_STROKE_WIDTH;
-            this.strokeDashArray = options.strokeDashArray || null;
-            this.opacity = options.opacity || 1;
-
-            this._loadTemplate();
+            this.fill = String(options.fill).startsWith("#") ? options.fill.toLowerCase() : null;
+            this.stroke = String(options.stroke).startsWith("#") ? options.stroke.toLowerCase() : this._DEFAULT_COLOR;
+            this.strokeWidth = (options.strokeWidth >= 0) ? options.strokeWidth : this._DEFAULT_STROKE_WIDTH;
+            this.strokeDashArray = (Array.isArray(options.strokeDashArray) && options.strokeDashArray.length > 0) ? options.strokeDashArray : null;
+            this.opacity = (options.opacity > 0) ? options.opacity : 1;
         }
 
         _loadTemplate() {
@@ -863,32 +865,7 @@
         }
 
         reset(options) {
-            if (!options)
-                return;
-            if (options.width) {
-                this.width = options.width;
-            }
-            if (options.height) {
-                this.height = options.height;
-            }
-            if (options.backgroundImage !== undefined) {
-                this.backgroundImage = options.backgroundImage;
-            }
-            if (options.fill !== undefined) {
-                this.fill = options.fill;
-            }
-            if (options.stroke !== undefined) {
-                this.stroke = options.stroke;
-            }
-            if (options.strokeWidth) {
-                this.strokeWidth = options.strokeWidth;
-            }
-            if (options.strokeDashArray !== undefined) {
-                this.strokeDashArray = options.strokeDashArray;
-            }
-            if (options.opacity) {
-                this.opacity = options.opacity;
-            }
+            this._loadOptions(options);
             this.clear();
         }
 
