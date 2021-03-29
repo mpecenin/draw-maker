@@ -95,10 +95,11 @@
                         }
 
                         .dm-drawmaker {
-                            width: calc(100% - 2px);
-                            height: calc(100% - 2px);
+                            width: 100%;
+                            height: 100%;
                             max-width: inherit;
                             max-height: inherit;
+                            box-sizing: border-box;
                             background-color: white;
                             display: inline-flex;
                             flex-direction: column;
