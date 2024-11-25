@@ -498,7 +498,7 @@
 
             // ---------------------------------------------------------------------------------------
 
-            this._attachListener(".dm-menu [data-dm-maker]", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-maker]", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 if (listener.classList.contains("dm-select")) {
                     return this._onMakerDeselect();
                 } else {
@@ -523,24 +523,24 @@
                 }
             });
 
-            this._attachListener(".dm-menu [data-dm-operation='remove']", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-operation='remove']", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 let objs = this.getSelectedObjects();
                 this.canvas.discardActiveObject();
                 this.canvas.remove(...objs);
             });
 
-            this._attachListener(".dm-menu [data-dm-operation='duplicate']", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-operation='duplicate']", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 this._onDuplicate();
             });
 
-            this._attachListener(".dm-menu [data-dm-operation='zoomIn']", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-operation='zoomIn']", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 return this._onZoomIn();
             });
-            this._attachListener(".dm-menu [data-dm-operation='zoomOut']", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-operation='zoomOut']", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 return this._onZoomOut();
             });
 
-            this._attachListener(".dm-menu [data-dm-operation='fullscreen']", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-operation='fullscreen']", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 if (listener.classList.contains("dm-select")) {
                     this._detachClass(".dm-drawmaker", "dm-fullscreen");
                     listener.classList.remove("dm-select");
@@ -550,23 +550,23 @@
                 }
             });
 
-            this._attachListener(".dm-menu [data-dm-operation='bringForwards']", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-operation='bringForwards']", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 this.getSelectedObjects().forEach(obj => {
                     this.canvas.bringForward(obj);
                 });
             });
-            this._attachListener(".dm-menu [data-dm-operation='sendBackwards']", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-operation='sendBackwards']", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 this.getSelectedObjects().forEach(obj => {
                     this.canvas.sendBackwards(obj);
                 });
             });
 
-            this._attachListener(".dm-menu [data-dm-operation='bringToFront']", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-operation='bringToFront']", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 this.getSelectedObjects().forEach(obj => {
                     this.canvas.bringToFront(obj);
                 });
             });
-            this._attachListener(".dm-menu [data-dm-operation='sendToBack']", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-operation='sendToBack']", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 this.getSelectedObjects().forEach(obj => {
                     this.canvas.sendToBack(obj);
                 });
@@ -574,7 +574,7 @@
 
             // ---------------------------------------------------------------------------------------
 
-            this._attachListener(".dm-menu [data-dm-property]", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-menu [data-dm-property]", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 let property = listener.getAttribute("data-dm-property");
                 let currValue = this._onGetProperty(property);
                 let modal = ".dm-modal[data-dm-property='" + property + "']";
@@ -584,7 +584,7 @@
                 this._attachClass(modal + " button[value='" + currValue + "']", "dm-select");
             });
 
-            this._attachListener(".dm-modal[data-dm-property] button", this._eventType("click", "touchstart"), (listener, event) => {
+            this._attachListener(".dm-modal[data-dm-property] button", this._eventType("mousedown", "touchstart", "pointerdown"), (listener, event) => {
                 let property = listener.getAttribute("data-dm-property");
                 let selectValue = listener.value;
                 let modal = ".dm-modal[data-dm-property='" + property + "']";
@@ -616,8 +616,12 @@
             }, options);
         }
 
-        _eventType(mouseType, touchType) {
-            return fabric.isTouchSupported ? touchType : mouseType;
+        _eventType(mouseType, touchType, pointerType) {
+            if ((fabric.window && "onpointerdown" in fabric.window) || (fabric.document && "onpointerdown" in fabric.document))
+                return pointerType;
+            if ((fabric.window && "ontouchstart" in fabric.window) || (fabric.document && "ontouchstart" in fabric.document))
+                return touchType;
+            return mouseType;
         }
 
         _attachListener(selector, eventType, callback) {
